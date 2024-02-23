@@ -1,7 +1,6 @@
 import requests
 from tqdm import tqdm
 import time
-import py7zr
 import os
 import sys
 import subprocess
