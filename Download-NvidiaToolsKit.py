@@ -1,10 +1,11 @@
 import requests
 from tqdm import tqdm
 import time
+import py7zr
 import os
 import sys
 import subprocess
-
+import ctypes
 
 def download_cudaToolkit():
     nvidiaurl = "https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda_12.3.2_546.12_windows.exe"  
@@ -24,12 +25,12 @@ def download_cudaToolkit():
                 fichier.write(morceau)
                 barre_progression.update(len(morceau))
 
-
 def executing_Cuda():
     install_cmd = "cuda_12.3.2_546.12_windows.exe"
-    subprocess.run([install_cmd], check=True)
+    ctypes.windll.shell32.ShellExecuteW(None, "runas", install_cmd, None, None, 1)
 
-download_cudaToolkit()
-os.system("cls")
-executing_Cuda()
-sys.exit(1)
+if __name__ == "__main__":
+    download_cudaToolkit()
+    os.system("cls")
+    executing_Cuda()
+    sys.exit(1)
